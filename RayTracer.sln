@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RayTracer", "Build\Projects\RayTracer.vcxproj", "{ACE21F2D-7795-B04F-BAB8-6ABA7D456854}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4F9DC66D-3060-CF49-922B-588180FEB1BD} = {4F9DC66D-3060-CF49-922B-588180FEB1BD}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Build\Projects\Engine.vcxproj", "{4F9DC66D-3060-CF49-922B-588180FEB1BD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ACE21F2D-7795-B04F-BAB8-6ABA7D456854}.Debug|Win32.ActiveCfg = Debug|Win32
+		{ACE21F2D-7795-B04F-BAB8-6ABA7D456854}.Debug|Win32.Build.0 = Debug|Win32
+		{ACE21F2D-7795-B04F-BAB8-6ABA7D456854}.Release|Win32.ActiveCfg = Release|Win32
+		{ACE21F2D-7795-B04F-BAB8-6ABA7D456854}.Release|Win32.Build.0 = Release|Win32
+		{4F9DC66D-3060-CF49-922B-588180FEB1BD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4F9DC66D-3060-CF49-922B-588180FEB1BD}.Debug|Win32.Build.0 = Debug|Win32
+		{4F9DC66D-3060-CF49-922B-588180FEB1BD}.Release|Win32.ActiveCfg = Release|Win32
+		{4F9DC66D-3060-CF49-922B-588180FEB1BD}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

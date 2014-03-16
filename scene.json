@@ -1,0 +1,96 @@
+{
+	"settings" : {
+		"size"       : [1920, 1200],
+		"samples"    : 16384,
+		"background" : [1, 1, 1]
+	},
+
+	"camera" : {
+		"eye"      : [0, -250, 20],
+		"lookat"   : [0, 0, 0],
+		"up"       : [0, 0, 1],
+		"distance" : 1.0,
+		"width"    : 1.0
+	},
+
+	"objects" : [
+		{
+			"name" : "Left Wall",
+			"material" : {
+				"type"     : "diffuse",
+				"diffuse"  : [0.25, 0.75, 0.25],
+				"emissive" : [0, 0, 0],
+			},
+			"shape" : {
+				"type" : "aabb",
+				"min"  : [-121, -100, -100],
+				"max"  : [-120, 100, 100]
+			}
+		},
+		{
+			"name" : "Right Wall",
+			"material" : {
+				"type"     : "diffuse",
+				"diffuse"  : [0.75, 0.25, 0.25],
+				"emissive" : [0, 0, 0],
+			},
+			"shape" : {
+				"type" : "aabb",
+				"min"  : [120, -100, -100],
+				"max"  : [121, 100, 100]
+			}
+		},
+		{
+			"name" : "Back Wall",
+			"material" : {
+				"type"     : "diffuse",
+				"diffuse"  : [0.75, 0.75, 0.75],
+				"emissive" : [0, 0, 0]
+			},
+			"shape" : {
+				"type" : "aabb",
+				"min"  : [-120, 100, -100],
+				"max"  : [121, 100, 100]
+			}
+		},
+		{
+			"name" : "Bottom",
+			"material" : {
+				"type"     : "diffuse",
+				"diffuse"  : [0.75, 0.75, 0.75],
+				"emissive" : [0, 0, 0]
+			},
+			"shape" : {
+				"type" : "aabb",
+				"min"  : [-120, -100, -101],
+				"max"  : [120, 100, -100]
+			}
+		},
+		{
+			"name" : "Top",
+			"material" : {
+				"type"     : "diffuse",
+				"diffuse"  : [0.75, 0.75, 0.75],
+				"emissive" : [0, 0, 0]
+			},
+			"shape" : {
+				"type" : "aabb",
+				"min"  : [-120, -100, 100],
+				"max"  : [120, 100, 101]
+			}
+		},
+		{
+			"name" : "Light",
+			"material" : {
+				"type"     : "diffuse",
+				"diffuse"  : [0, 0, 0],
+				"emissive" : [1, 1, 1]
+			},
+			"shape" : {
+				"type" : "aabb",
+				"min"  : [-40, -40, 99],
+				"max"  : [40, 40, 101]
+			}
+		}
+	]
+}
