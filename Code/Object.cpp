@@ -72,7 +72,7 @@ Object::Object(const Material & material) :
 //=============================================================================
 
 //=============================================================================
-Sphere::Sphere(const p3 & pos, float32 radius, const Material & material) :
+Sphere::Sphere(const Point3 & pos, float32 radius, const Material & material) :
     Object(material),
     mSphere(pos, radius)
 {
@@ -106,7 +106,7 @@ bool Sphere::Intersect( Result & out, const Ray3 & ray ) const
 //=============================================================================
 
 //=============================================================================
-Ellipsoid::Ellipsoid(const p3 & pos, const v3 & u, const v3 & v, const v3 & w, const Material & material) :
+Ellipsoid::Ellipsoid(const Point3 & pos, const Vector3 & u, const Vector3 & v, const Vector3 & w, const Material & material) :
 	Object(material),
 	mCenter(pos),
 	mObjectToWorld(
@@ -125,7 +125,7 @@ Ellipsoid::Ellipsoid(const p3 & pos, const v3 & u, const v3 & v, const v3 & w, c
 }
 
 //=============================================================================
-Ellipsoid::Ellipsoid(const p3 & pos, const v3 & radii, const Material & material) :
+Ellipsoid::Ellipsoid(const Point3 & pos, const Vector3 & radii, const Material & material) :
 	Object(material),
 	mCenter(pos),
 	mObjectToWorld(
@@ -154,7 +154,7 @@ Ellipsoid::Ellipsoid(const Ellipsoid & e) :
 bool Ellipsoid::Intersect(Result & out, const Ray3 & ray) const
 {
 	const Ray3 r(
-		mObjectToWorldI * (ray.origin - v3(mCenter)), 
+		mObjectToWorldI * (ray.origin - Vector3(mCenter)), 
 		mObjectToWorldI * ray.direction
 	);
 	
@@ -186,7 +186,7 @@ Ellipsoid * Ellipsoid::Clone() const
 //=============================================================================
 
 //=============================================================================
-Aabb::Aabb(const p3 & min, const p3 & max, const Material & material) :
+Aabb::Aabb(const Point3 & min, const Point3 & max, const Material & material) :
 	mAabb(min, max),
 	Object(material)
 {

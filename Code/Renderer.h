@@ -60,8 +60,8 @@ private: // Internal Private
 	uint    mSpp;					// Total samples per pixel
 	uint	mSamplesStratifiedSide; // Number of samples per side of a pixel to be stratified
 	uint	mSamplesRandom;			// Number of samples which are left over from stratified
-	//v2	mPixelSize; 			// Size of a pixel (Camera Space)
-	//v2    mSubPixelSize;			// Size of each sub-pixel area for stratified sampling (Camera Space)
+	//Vector2	mPixelSize; 			// Size of a pixel (Camera Space)
+	//Vector2    mSubPixelSize;			// Size of each sub-pixel area for stratified sampling (Camera Space)
 	float64 mPixelWidth;
 	float64 mPixelHeight;
 	float64 mSubPixelWidth;

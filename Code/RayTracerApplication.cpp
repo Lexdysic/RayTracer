@@ -322,8 +322,8 @@ void Application::SceneCreateWalls()
 		mat.emissive = Color(1.0f, 1.0f, 1.0f);
 
 		Object * pObject = new RT::Aabb(
-			p3(-radius, -radius, WALL_EXTENTS.y - 0.1f),
-			p3(+radius, +radius, WALL_EXTENTS.y - 0.0f),
+			Point3(-radius, -radius, WALL_EXTENTS.y - 0.1f),
+			Point3(+radius, +radius, WALL_EXTENTS.y - 0.0f),
 			mat
 		);
 		mScene.AddObject(pObject);
@@ -333,9 +333,9 @@ void Application::SceneCreateWalls()
 	{
 		const float32 aspect = mBackbuffer.GetWidth() / (float32)mBackbuffer.GetHeight();
 		mCamera.Setup(
-            v3(0.0f, -2.5f * WALL_EXTENTS.y, WALL_EXTENTS.z * 0.2f),
-            v3::Zero,
-            v3::UnitZ,
+            Vector3(0.0f, -2.5f * WALL_EXTENTS.y, WALL_EXTENTS.z * 0.2f),
+            Vector3::Zero,
+            Vector3::UnitZ,
             1.0f,
             1.0f,
             aspect);
@@ -401,9 +401,9 @@ void Application::SceneCreateReddit()
 	const float32 EAR_THICK   = 5.0f;
 
 	const float32 ANTENNA_BALL_RADIUS  = 10;
-	const v3  ANTENNA_BALL_POS(38.5f, -30.0f, -WALL_EXTENTS.z + HEAD_Z + HEAD_HEIGHT + 16.0f);
-	const v3  ANTENNA_BEND_POS(10.0f, -15.0f, -WALL_EXTENTS.z + HEAD_Z + HEAD_HEIGHT + 25.0f);
-	const v3  ANTENNA_HEAD_TOP(0.0f, 0.0f, -WALL_EXTENTS.z + HEAD_Z + HEAD_HEIGHT);
+	const Vector3  ANTENNA_BALL_POS(38.5f, -30.0f, -WALL_EXTENTS.z + HEAD_Z + HEAD_HEIGHT + 16.0f);
+	const Vector3  ANTENNA_BEND_POS(10.0f, -15.0f, -WALL_EXTENTS.z + HEAD_Z + HEAD_HEIGHT + 25.0f);
+	const Vector3  ANTENNA_HEAD_TOP(0.0f, 0.0f, -WALL_EXTENTS.z + HEAD_Z + HEAD_HEIGHT);
 	const float32 ANTENNA_RADIUS = 2.0f;
 
 	const float32 MOUTH_RADIUS = 15.0f;
@@ -417,10 +417,10 @@ void Application::SceneCreateReddit()
 	{
 		// Line 1
 		{
-			const v3 N = (ANTENNA_BEND_POS - ANTENNA_BALL_POS);
-			const p3 P = (ANTENNA_BEND_POS + ANTENNA_BALL_POS) * 0.5f;
+			const Vector3 N = (ANTENNA_BEND_POS - ANTENNA_BALL_POS);
+			const Point3 P = (ANTENNA_BEND_POS + ANTENNA_BALL_POS) * 0.5f;
 
-			v3 U, V, W;
+			Vector3 U, V, W;
 			BuildBasis(N, U, V, W);
 
 			Object * pObject = new RT::Ellipsoid(
@@ -434,10 +434,10 @@ void Application::SceneCreateReddit()
 
 		// Line 2
 		{
-			const v3 N = (ANTENNA_BEND_POS - ANTENNA_HEAD_TOP);
-			const p3 P = (ANTENNA_BEND_POS + ANTENNA_HEAD_TOP) * 0.5f;
+			const Vector3 N = (ANTENNA_BEND_POS - ANTENNA_HEAD_TOP);
+			const Point3 P = (ANTENNA_BEND_POS + ANTENNA_HEAD_TOP) * 0.5f;
 
-			v3 U, V, W;
+			Vector3 U, V, W;
 			BuildBasis(N, U, V, W);
 
 			Object * pObject = new RT::Ellipsoid(
@@ -464,8 +464,8 @@ void Application::SceneCreateReddit()
 	// Head
 	{
 		Object * pObject = new RT::Ellipsoid(
-			p3(0.0f, 0.0f, -WALL_EXTENTS.z + HEAD_Z),
-			v3(HEAD_HEIGHT * HEAD_ASPECT, HEAD_THICK, HEAD_HEIGHT),
+			Point3(0.0f, 0.0f, -WALL_EXTENTS.z + HEAD_Z),
+			Vector3(HEAD_HEIGHT * HEAD_ASPECT, HEAD_THICK, HEAD_HEIGHT),
 			MAT_WHITE
 		);
 		
@@ -475,8 +475,8 @@ void Application::SceneCreateReddit()
 	// Left Ear
 	{
 		Object * pObject = new RT::Ellipsoid(
-			p3(-EAR_X, EAR_Y, -WALL_EXTENTS.z + EAR_Z),
-			v3(EAR_RADIUS, EAR_THICK, EAR_RADIUS),
+			Point3(-EAR_X, EAR_Y, -WALL_EXTENTS.z + EAR_Z),
+			Vector3(EAR_RADIUS, EAR_THICK, EAR_RADIUS),
 			MAT_WHITE
 		);
 		
@@ -486,8 +486,8 @@ void Application::SceneCreateReddit()
 	// Right Ear
 	{
 		Object * pObject = new RT::Ellipsoid(
-			p3(EAR_X, EAR_Y, -WALL_EXTENTS.z + EAR_Z),
-			v3(EAR_RADIUS, EAR_THICK, EAR_RADIUS),
+			Point3(EAR_X, EAR_Y, -WALL_EXTENTS.z + EAR_Z),
+			Vector3(EAR_RADIUS, EAR_THICK, EAR_RADIUS),
 			MAT_WHITE
 		);
 		
@@ -497,7 +497,7 @@ void Application::SceneCreateReddit()
 	// Left Eye
 	{
 		Object * pObject = new RT::Sphere(
-			p3(-EYE_X, EYE_Y, -WALL_EXTENTS.z + EYE_Z),
+			Point3(-EYE_X, EYE_Y, -WALL_EXTENTS.z + EYE_Z),
 			EYE_RADIUS,
 			MAT_ORANGE
 		);
@@ -508,7 +508,7 @@ void Application::SceneCreateReddit()
 	// Right Eye
 	{
 		Object * pObject = new RT::Sphere(
-			p3(EYE_X, EYE_Y, -WALL_EXTENTS.z + EYE_Z),
+			Point3(EYE_X, EYE_Y, -WALL_EXTENTS.z + EYE_Z),
 			EYE_RADIUS,
 			MAT_ORANGE
 		);
@@ -518,13 +518,13 @@ void Application::SceneCreateReddit()
 
 	// Mouth
 	{
-		const v3 N(0.0f, -Cos(MOUTH_TILT), Sin(MOUTH_TILT));
+		const Vector3 N(0.0f, -Cos(MOUTH_TILT), Sin(MOUTH_TILT));
 
-		v3 U, V, W;
+		Vector3 U, V, W;
 		BuildBasis(N, U, V, W);
 
 		Object * pObject = new RT::Ellipsoid(
-			p3(0.0f, MOUTH_Y, -WALL_EXTENTS.z + MOUTH_Z),
+			Point3(0.0f, MOUTH_Y, -WALL_EXTENTS.z + MOUTH_Z),
 			U * MOUTH_THICK, V * MOUTH_RADIUS, W * MOUTH_RADIUS, 
 			MAT_BLACK
 		);
@@ -535,8 +535,8 @@ void Application::SceneCreateReddit()
 	// Body
 	{
 		Object * pObject = new RT::Ellipsoid(
-			p3(0.0f, 0.0f, -WALL_EXTENTS.z + BODY_Z),
-			v3(BODY_WIDTH, BODY_THICK, BODY_HEIGHT),
+			Point3(0.0f, 0.0f, -WALL_EXTENTS.z + BODY_Z),
+			Vector3(BODY_WIDTH, BODY_THICK, BODY_HEIGHT),
 			MAT_WHITE
 		);
 		
@@ -546,8 +546,8 @@ void Application::SceneCreateReddit()
 	// Left Arm
 	{
 		Object * pObject = new RT::Ellipsoid(
-			p3(-ARM_X, 0.0f, -WALL_EXTENTS.z + ARM_Z),
-			v3(ARM_WIDTH, ARM_THICK, ARM_HEIGHT),
+			Point3(-ARM_X, 0.0f, -WALL_EXTENTS.z + ARM_Z),
+			Vector3(ARM_WIDTH, ARM_THICK, ARM_HEIGHT),
 			MAT_WHITE
 		);
 		
@@ -557,8 +557,8 @@ void Application::SceneCreateReddit()
 	// Right Arm
 	{
 		Object * pObject = new RT::Ellipsoid(
-			p3(ARM_X, 0.0f, -WALL_EXTENTS.z + ARM_Z),
-			v3(ARM_WIDTH, ARM_THICK, ARM_HEIGHT),
+			Point3(ARM_X, 0.0f, -WALL_EXTENTS.z + ARM_Z),
+			Vector3(ARM_WIDTH, ARM_THICK, ARM_HEIGHT),
 			MAT_WHITE
 		);
 		
@@ -568,8 +568,8 @@ void Application::SceneCreateReddit()
 	// Left Foot
 	{
 		Object * pObject = new RT::Ellipsoid(
-			p3(-FEET_X, 0.0f, -WALL_EXTENTS.z + FEET_Z),
-			v3(FEET_WIDTH, FEET_THICK, FEET_HEIGHT),
+			Point3(-FEET_X, 0.0f, -WALL_EXTENTS.z + FEET_Z),
+			Vector3(FEET_WIDTH, FEET_THICK, FEET_HEIGHT),
 			MAT_WHITE
 		);
 		
@@ -579,8 +579,8 @@ void Application::SceneCreateReddit()
 	// Right Foot
 	{
 		Object * pObject = new RT::Ellipsoid(
-			p3(FEET_X, 0.0f, -WALL_EXTENTS.z + FEET_Z),
-			v3(FEET_WIDTH, FEET_THICK, FEET_HEIGHT),
+			Point3(FEET_X, 0.0f, -WALL_EXTENTS.z + FEET_Z),
+			Vector3(FEET_WIDTH, FEET_THICK, FEET_HEIGHT),
 			MAT_WHITE
 		);
 		
@@ -606,7 +606,7 @@ void Application::SceneCreateSpheres()
 		mat.emissive = Color(0.0f, 0.0f, 0.0f);
 
 		Object * pObject = new RT::Sphere(
-			p3(-1.2f * BALL_SIZE, -40.0f, -WALL_EXTENTS.z + BALL_SIZE), 
+			Point3(-1.2f * BALL_SIZE, -40.0f, -WALL_EXTENTS.z + BALL_SIZE), 
 			BALL_SIZE, 
 			mat
 		);
@@ -621,7 +621,7 @@ void Application::SceneCreateSpheres()
 		mat.emissive = Color(0.0f, 0.0f, 0.0f);
 
 		Object * pObject = new RT::Sphere(
-			p3(1.5f * BALL_SIZE, 0.0f, -WALL_EXTENTS.z + BALL_SIZE), 
+			Point3(1.5f * BALL_SIZE, 0.0f, -WALL_EXTENTS.z + BALL_SIZE), 
 			BALL_SIZE, 
 			mat
 		);

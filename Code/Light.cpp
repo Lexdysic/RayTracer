@@ -18,13 +18,13 @@ Light::Light( const Color & color )
 }
 
 
-PointLight::PointLight(const p3 & pos, const Color & color)
+PointLight::PointLight(const Point3 & pos, const Color & color)
 : mPos( pos )
 , Light( color )
 {
 }
 
-v3 PointLight::GetRay(const p3 & point) const
+Vector3 PointLight::GetRay(const Point3 & point) const
 {
 	return mPos - point;
 }

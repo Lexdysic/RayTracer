@@ -68,7 +68,7 @@ protected:
 class Sphere : public Object
 {
 public:
-	Sphere(const p3 & pos, float32 radius, const Material & material);
+	Sphere(const Point3 & pos, float32 radius, const Material & material);
 
 	virtual bool Intersect(Result & out, const Ray3 & ray) const;
 	virtual Sphere * Clone() const;
@@ -85,8 +85,8 @@ private:
 class Ellipsoid : public Object
 {
 public:
-	Ellipsoid(const p3 & pos, const v3 & radii, const Material & material);
-	Ellipsoid(const p3 & pos, const v3 & u, const v3 & v, const v3 & w, const Material & material);
+	Ellipsoid(const Point3 & pos, const Vector3 & radii, const Material & material);
+	Ellipsoid(const Point3 & pos, const Vector3 & u, const Vector3 & v, const Vector3 & w, const Material & material);
 	Ellipsoid(const Ellipsoid & e);
 
 	virtual bool Intersect(Result & out, const Ray3 & ray) const;
@@ -108,7 +108,7 @@ private:
 class Aabb : public Object
 {
 public: 
-	Aabb(const p3 & min, const p3 & max, const Material & material);
+	Aabb(const Point3 & min, const Point3 & max, const Material & material);
 
 	virtual bool Intersect(Result & out, const Ray3 & ray) const;
 	virtual Aabb * Clone() const;

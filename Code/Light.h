@@ -22,7 +22,7 @@ class Light
 public:
 	Light(const Color & color);
 	//! Function to get a ray to a point
-	virtual v3 GetRay(const p3 & point) const = 0;
+	virtual Vector3 GetRay(const Point3 & point) const = 0;
 	//! Returns the color of this light
 	inline const Color & GetColor() const { return mColor; }
 
@@ -38,12 +38,12 @@ protected:
 class PointLight : public Light
 {
 public:
-	PointLight( const p3 & pos, const Color & color );
+	PointLight( const Point3 & pos, const Color & color );
 
-	virtual v3 GetRay(const p3 & point) const;
+	virtual Vector3 GetRay(const Point3 & point) const;
 
 private:
-	p3	mPos;
+	Point3	mPos;
 };
 
 
