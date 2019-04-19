@@ -1,4 +1,6 @@
 
+#include "Basics/Thread.h"
+
 namespace RT
 {
 
@@ -23,6 +25,9 @@ public:
         m_width(rhs.m_width), 
         m_height(rhs.m_height)
     {}
+
+    CImage & operator= (const CImage & rhs) = default;
+    CImage & operator= (CImage && rhs) = default;
 
     void Resize (uint width, uint height);
 

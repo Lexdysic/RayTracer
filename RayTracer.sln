@@ -1,29 +1,47 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RayTracer", "Build\Projects\RayTracer.vcxproj", "{7C589E61-7FC6-CD40-9D87-0F48E16784EA}"
+# Visual Studio 15
+VisualStudioVersion = 15.0.27428.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "RayTracer", "Build\Projects\RayTracer.vcxproj", "{123F68F5-7EA9-1C6C-C7E7-CD113391FAC0}"
 	ProjectSection(ProjectDependencies) = postProject
-		{FCEB5F38-842D-9244-A01E-FBF9EE0A74D0} = {FCEB5F38-842D-9244-A01E-FBF9EE0A74D0}
+		{567C1404-C25B-939F-CB73-1E7637D2F900} = {567C1404-C25B-939F-CB73-1E7637D2F900}
 	EndProjectSection
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Engine", "Build\Projects\Engine.vcxproj", "{FCEB5F38-842D-9244-A01E-FBF9EE0A74D0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Ferrite", "..\Ferrite\Build\Projects\Ferrite.vcxproj", "{567C1404-C25B-939F-CB73-1E7637D2F900}"
 EndProject
 Global
+	GlobalSection(Performance) = preSolution
+		HasPerformanceSessions = true
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
 		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{7C589E61-7FC6-CD40-9D87-0F48E16784EA}.Debug|Win32.ActiveCfg = Debug|Win32
-		{7C589E61-7FC6-CD40-9D87-0F48E16784EA}.Debug|Win32.Build.0 = Debug|Win32
-		{7C589E61-7FC6-CD40-9D87-0F48E16784EA}.Release|Win32.ActiveCfg = Release|Win32
-		{7C589E61-7FC6-CD40-9D87-0F48E16784EA}.Release|Win32.Build.0 = Release|Win32
-		{FCEB5F38-842D-9244-A01E-FBF9EE0A74D0}.Debug|Win32.ActiveCfg = Debug|Win32
-		{FCEB5F38-842D-9244-A01E-FBF9EE0A74D0}.Debug|Win32.Build.0 = Debug|Win32
-		{FCEB5F38-842D-9244-A01E-FBF9EE0A74D0}.Release|Win32.ActiveCfg = Release|Win32
-		{FCEB5F38-842D-9244-A01E-FBF9EE0A74D0}.Release|Win32.Build.0 = Release|Win32
+		{123F68F5-7EA9-1C6C-C7E7-CD113391FAC0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{123F68F5-7EA9-1C6C-C7E7-CD113391FAC0}.Debug|Win32.Build.0 = Debug|Win32
+		{123F68F5-7EA9-1C6C-C7E7-CD113391FAC0}.Debug|x64.ActiveCfg = Debug|x64
+		{123F68F5-7EA9-1C6C-C7E7-CD113391FAC0}.Debug|x64.Build.0 = Debug|x64
+		{123F68F5-7EA9-1C6C-C7E7-CD113391FAC0}.Release|Win32.ActiveCfg = Release|Win32
+		{123F68F5-7EA9-1C6C-C7E7-CD113391FAC0}.Release|Win32.Build.0 = Release|Win32
+		{123F68F5-7EA9-1C6C-C7E7-CD113391FAC0}.Release|x64.ActiveCfg = Release|x64
+		{123F68F5-7EA9-1C6C-C7E7-CD113391FAC0}.Release|x64.Build.0 = Release|x64
+		{567C1404-C25B-939F-CB73-1E7637D2F900}.Debug|Win32.ActiveCfg = Debug|Win32
+		{567C1404-C25B-939F-CB73-1E7637D2F900}.Debug|Win32.Build.0 = Debug|Win32
+		{567C1404-C25B-939F-CB73-1E7637D2F900}.Debug|x64.ActiveCfg = Debug|x64
+		{567C1404-C25B-939F-CB73-1E7637D2F900}.Debug|x64.Build.0 = Debug|x64
+		{567C1404-C25B-939F-CB73-1E7637D2F900}.Release|Win32.ActiveCfg = Release|Win32
+		{567C1404-C25B-939F-CB73-1E7637D2F900}.Release|Win32.Build.0 = Release|Win32
+		{567C1404-C25B-939F-CB73-1E7637D2F900}.Release|x64.ActiveCfg = Release|x64
+		{567C1404-C25B-939F-CB73-1E7637D2F900}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {34B92CE8-BC3C-4FBB-9A7B-3719C455A284}
 	EndGlobalSection
 EndGlobal

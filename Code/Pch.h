@@ -1,18 +1,12 @@
-#ifdef PCH_H
-#  error "Cannot include header more than once."
-#endif
-#define PCH_H
 
-#define USES_ENGINE_MATH
-#define USES_ENGINE_GEOMETRY
-#define USES_ENGINE_SYSTEM
-#define USES_ENGINE_THREAD
-#define USES_ENGINE_COLOR
-#define USES_ENGINE_TIME
-#define USES_ENGINE_SERVICES_JSON
+#pragma once
 
-#include "EngineDeps.h"
-
+#include "Core/Math/Math.h"
+#include "Basics/Geometry.h"
+#include "Systems/window.h"
+#include "Basics/Color.h"
+#include "Basics/Time.h"
+#include "Utilities/json.h"
 
 #include "Image.h"
 #include "Camera.h"

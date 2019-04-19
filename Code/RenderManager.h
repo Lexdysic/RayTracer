@@ -40,18 +40,18 @@ protected:
     void CompleteBlock ();
 
 private:
-	typedef std::vector<Renderer> RendererList;
+	typedef std::vector<Renderer *> RendererList;
 	typedef std::vector<Block>    BlockList;
 
-    CriticalSection   mLockRenderers;
+    CriticalSection   mLockBlocks;
 	RendererList 	  mRenderers;
 	BlockList	      mBlocks;
 	Scene & 		  mScene;
 	Camera & 	      mCamera;
 	CImage &          mBackbuffer;
-    std::atomic<uint> mCompletedBlocks;
-	uint32               mTotalBlocks;
-	uint32               mSpp;
+    std::atomic<uint> mCompletedBlocks{0};
+	uint32            mTotalBlocks;
+	uint32            mSpp;
 
 };
 

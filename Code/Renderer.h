@@ -31,7 +31,7 @@ struct Block
 //
 //==================================================================================================
 
-class Renderer : public Thread
+class Renderer : public CThread
 {
 	
 public:

@@ -58,6 +58,14 @@ std::ostream & operator<< (std::ostream & out, const ToTime & t)
 	return out;
 }
 
+//===========================================================================
+void find_replace (char * str, char what, char with) {
+    for (char * it = str; *it != '\0'; ++it) {
+        if (*it == what)
+            *it = with;
+    }
+}
+
 
 //=============================================================================
 // Application
@@ -68,14 +76,12 @@ Application::Application() :
 	mBackbuffer(WIDTH, HEIGHT),
 	mRenderManager(mScene, mCamera, mBackbuffer)
 {
-
-	mRenderManager.SetSamplesPerPixel(100);
-
-    if (!TrySceneFromFile())
+    //if (!TrySceneFromFile())
     {
+	    mRenderManager.SetSamplesPerPixel(1000);
 	    SceneCreateWalls();
-	    //SceneCreateSpheres();
-	    //SceneCreateReddit();
+	    SceneCreateSpheres();
+	    SceneCreateReddit();
     }
 }
 
@@ -116,32 +122,42 @@ void Application::Run()
 			lastProgress = currProgress;
 		}
 
-        ThreadSleep(0);
+        ThreadSleep(Time::Seconds(1));
 	}
+    
+    char filename[64];
+    strncpy_s(filename, "Image - " __DATE__ " - " __TIME__ ".tga", 64);
+    find_replace(filename, ':', '_');
 
-    mBackbuffer.Save("Image.ppm");
+    mBackbuffer.Save(filename);
 }
 
 //=============================================================================
-bool Application::TrySceneFromFile()
+bool Application::TrySceneFromFile ()
 {
     using namespace Json;
 
-    const CValue & root = ParseFile("scene.json");
+    CDocument doc;
+    doc.Parse("scene.json");
+
+    if (!doc.IsValid())
+        return false;
+
+    const CValue & root = doc.GetValue();
     if (root.GetType() != EType::Object)
         return false;
     
     // Settings
     breakable_scope
     {
-        const CValue & settings = root["settings"];
+        const CValue & settings = root[{"settings"}];
         if (settings == null)
             break;
 
         // Size
         breakable_scope
         {
-            const CValue & jsonSize = settings["size"];
+            const CValue & jsonSize = settings[{"size"}];
             if (jsonSize == null)
                 break;
 
@@ -158,7 +174,7 @@ bool Application::TrySceneFromFile()
         // Samples
         breakable_scope
         {
-            const CValue & samplesValue = settings["samples"];
+            const CValue & samplesValue = settings[{"samples"}];
             if (samplesValue == null)
                 break;
 
@@ -174,7 +190,7 @@ bool Application::TrySceneFromFile()
         mScene.SetBackgroundColor(Color::Black);
         breakable_scope
         {
-            const CValue & jsonBg = settings["background"];
+            const CValue & jsonBg = settings[{"background"}];
             if (jsonBg == null)
                 break;
             
@@ -189,7 +205,7 @@ bool Application::TrySceneFromFile()
     // Camera
     breakable_scope
     {
-        const CValue & jsonCamera = root["camera"];
+        const CValue & jsonCamera = root[{"camera"}];
         if (jsonCamera == null)
             return false;
          
@@ -200,7 +216,7 @@ bool Application::TrySceneFromFile()
     //Objects
     breakable_scope
     {
-        const CValue & jsonObjects = root["objects"];
+        const CValue & jsonObjects = root[{"objects"}];
         if (jsonObjects == null)
             break;
 
@@ -236,7 +252,7 @@ void Application::SceneCreateWalls()
 	const Vector3 mask110(1, 1, 0);
 	const Aabb3   dims(Point3::Zero, WALL_EXTENTS);
 
-	mScene.SetBackgroundColor(Color::White);
+	mScene.SetBackgroundColor(Color(0.1f, 0.1f, 0.1f));
 
 	// Left
 	{
@@ -319,7 +335,7 @@ void Application::SceneCreateWalls()
 		Material mat;
 		mat.type     = MATERIAL_TYPE_DIFFUSE;
 		mat.diffuse  = Color(0.0f, 0.0f, 0.0f);
-		mat.emissive = Color(1.0f, 1.0f, 1.0f);
+		mat.emissive = Color(10.0f, 10.0f, 10.0f);
 
 		Object * pObject = new RT::Aabb(
 			Point3(-radius, -radius, WALL_EXTENTS.y - 0.1f),

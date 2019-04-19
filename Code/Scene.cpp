@@ -40,17 +40,17 @@ Scene::~Scene ()
 //=============================================================================
 bool Scene::FindObject (const Object *& pBestObject, Result & bestResult, const Ray3 & ray) const 
 {
-	pBestObject = NULL;
+	pBestObject = null;
 	bestResult.time = std::numeric_limits<float32>::infinity();
 
-	for( uint32 i = 0; i < mpObjects.size(); ++i )
+	for (uint32 i = 0; i < mpObjects.size(); ++i)
 	{
-		const Object* pObject = mpObjects[i];
+		const Object * pObject = mpObjects[i];
 
 		Result result;
-		if( pObject->Intersect(result, ray) )
+		if (pObject->Intersect(result, ray))
 		{
-			if( result.time < bestResult.time )
+			if (result.time < bestResult.time)
 			{
 				bestResult	= result;
 				pBestObject = pObject;
@@ -58,7 +58,7 @@ bool Scene::FindObject (const Object *& pBestObject, Result & bestResult, const 
 		}
 	}
 
-	return pBestObject != NULL;
+	return pBestObject != null;
 }
 
 }// namespace RT
@@ -141,7 +141,7 @@ bool ParseMaterial (const Json::CValue & json, RT::Material * out)
     using namespace Json;
 
     // Type
-    const CValue & jsonType = json["type"];
+    const CValue & jsonType = json[{"type"}];
     if (jsonType.GetType() != EType::String)
         return false;
 
@@ -151,10 +151,10 @@ bool ParseMaterial (const Json::CValue & json, RT::Material * out)
     else if (type == "refract") out->type = RT::MATERIAL_TYPE_REFRACT;
     else return false;
 
-    if (!ParseColor(json["diffuse"], &out->diffuse))
+    if (!ParseColor(json[CString{"diffuse"}], &out->diffuse))
         return false;
 
-    if (!ParseColor(json["emissive"], &out->emissive))
+    if (!ParseColor(json[CString{"emissive"}], &out->emissive))
         return false;
 
     return true;

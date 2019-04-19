@@ -1,4 +1,5 @@
 #include "Pch.h"
+#include <cassert>
 
 namespace RT
 {
@@ -19,12 +20,12 @@ Object * ParseObject (const Json::CValue & json)
     using namespace Json;
 
     Material material;
-    if (!ParseMaterial(json["material"], &material))
+    if (!ParseMaterial(json[{"material"}], &material))
         return null;
 
-    const CValue & jsonShape = json["shape"];
+    const CValue & jsonShape = json[{"shape"}];
 
-    const CValue & jsonType = jsonShape["type"];
+    const CValue & jsonType = jsonShape[{"type"}];
     if (jsonType.GetType() != EType::String)
         return null;
 
@@ -40,10 +41,10 @@ Object * ParseObject (const Json::CValue & json)
     else if (type == "aabb")
     {
         Point3 min, max;
-        if (!ParsePoint3(jsonShape["min"], &min))
+        if (!ParsePoint3(jsonShape[{"min"}], &min))
             return null;
 
-        if (!ParsePoint3(jsonShape["max"], &max))
+        if (!ParsePoint3(jsonShape[{"max"}], &max))
             return null;
 
         return new RT::Aabb(min, max, material);

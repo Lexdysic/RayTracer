@@ -19,7 +19,7 @@ RenderManager::RenderManager (Scene & scene, Camera & camera, CImage & backbuffe
 	mScene(scene),
 	mCamera(camera),
 	mBackbuffer(backbuffer),
-	mSpp(10)
+	mSpp(100)
 {
 
 
@@ -28,8 +28,12 @@ RenderManager::RenderManager (Scene & scene, Camera & camera, CImage & backbuffe
 //=============================================================================
 RenderManager::~RenderManager ()
 {
-	for (auto & renderer : mRenderers)
-		renderer.ThreadStop();
+	for (auto renderer : mRenderers) {
+		renderer->Stop();
+        delete renderer;
+    }
+
+
 }
 
 //=============================================================================
@@ -49,7 +53,7 @@ void RenderManager::Start ()
 			mBlocks.push_back(block2);
 		}
 
-		mTotalBlocks = mBlocks.size();
+		mTotalBlocks = uint(mBlocks.size());
 	}
 
 	// Renderers
@@ -58,13 +62,13 @@ void RenderManager::Start ()
 		const uint numRenderers = Max<sint>(1, numLogicProc - 1);
 
 		for (uint i = 0; i < numRenderers; ++i)
-			mRenderers.push_back(Renderer(mScene, mCamera, mBackbuffer, *this));
+			mRenderers.push_back(new Renderer(mScene, mCamera, mBackbuffer, *this));
 	}
 
-	for( RendererList::iterator it = mRenderers.begin(); it != mRenderers.end(); ++it )
+	for (auto renderer : mRenderers)
 	{
-		it->SetSamplesPerPixel(mSpp);
-		it->ThreadStart();
+		renderer->SetSamplesPerPixel(mSpp);
+		renderer->Start();
 	}
 }
 
@@ -77,17 +81,20 @@ bool RenderManager::IsDone ()
 //=============================================================================
 bool RenderManager::GetBlock (Block & out) 
 {
-    mLockRenderers.Enter();
+    bool ret = false;
 
-	if (mBlocks.empty())
-		return false;
+    mLockBlocks.Enter();
 
-	out = mBlocks.back();
-	mBlocks.pop_back();
-    
-    mLockRenderers.Leave();
+    if (!mBlocks.empty()) {
+        ret =  true;
 
-	return true;
+        out = mBlocks.back();
+        mBlocks.pop_back();
+    }
+
+    mLockBlocks.Leave();
+
+    return ret;
 }
 
 //=============================================================================

@@ -27,7 +27,7 @@ void Camera::Setup (
 	mEye	= eye;
 	mCenter	= eye + view * distance;
 	mRight	= Cross(view, upN);
-	mDown	= Cross(view, mRight);
+	mDown	= -Cross(view, mRight);
 
 	mRight *= (width * 0.5f * aspect);
 	mDown  *= (width * 0.5f);
@@ -44,11 +44,11 @@ void Camera::Setup (
     if (!settings)
         return;
 
-    const auto & eyeValue      = json["eye"];
-    const auto & lookatValue   = json["lookat"];
-    const auto & upValue       = json["up"];
-    const auto & distanceValue = json["distance"];
-    const auto & widthValue    = json["width"];
+    const auto & eyeValue      = json[{"eye"}];
+    const auto & lookatValue   = json[{"lookat"}];
+    const auto & upValue       = json[{"up"}];
+    const auto & distanceValue = json[{"distance"}];
+    const auto & widthValue    = json[{"width"}];
     if (
         eyeValue == null ||
         lookatValue == null ||

@@ -208,7 +208,7 @@ static bool ComputeTransmission(
 //=============================================================================
 Color Renderer::SampleScene (const Ray3 & ray, unsigned recursiveDepth)
 {
-	const Object * pObject = NULL;
+	const Object * pObject = null;
 	Result bestResult;
 	if (!mScene.FindObject(pObject, bestResult, ray))
 		return mScene.GetBackgroundColor();
@@ -241,11 +241,11 @@ Color Renderer::SampleScene (const Ray3 & ray, unsigned recursiveDepth)
 			BuildBasis(N, U, V, W);
 
 			const Vector3 uvw = SampleInHemisphere(mRand);
-			assert(!Equal(uvw, Vector3::Zero));
-			assert(Normalized(uvw));
+			//assert(!Equal(uvw, Vector3::Zero));
+			//assert(Normalized(uvw));
 
 			const Vector3 newDirection = Normalize(uvw.x * U + uvw.y * V + uvw.z * W);
-			assert(Normalized(newDirection));
+			//assert(Normalized(newDirection));
 
 			const Ray3 newRay(P + N * EPSILON, newDirection);
 
@@ -257,7 +257,7 @@ Color Renderer::SampleScene (const Ray3 & ray, unsigned recursiveDepth)
 		case MATERIAL_TYPE_REFLECT:
 		{
 			const Vector3 newDirection =  Normalize(D - N * 2.0f * Dot(N, D));
-			assert(Normalized(newDirection));
+			//assert(Normalized(newDirection));
 			const Ray3 newRay(P + N * EPSILON, newDirection);
 			const Color reflected = SampleScene(newRay, recursiveDepth + 1);
 			return mat.emissive + f * reflected;

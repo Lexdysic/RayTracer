@@ -7,11 +7,6 @@
 namespace RT
 {
 
-static Color FixForPaintDotNet (const Color & color)
-{
-    return Color(color.b, color.g, color.r, color.a);
-}
-
 CImage::CImage (uint width, uint height) :
     m_width(width),
     m_height(height)
@@ -46,22 +41,38 @@ Color CImage::GetPixel (uint x, uint y) const
 
 void CImage::Save (const char filename[]) const
 {
-    FILE * f = fopen(filename, "w");
+    FILE * f = fopen(filename, "wb");
 
-    fprintf(f, "P3\n%u %u\n255\n", m_width, m_height);
+#include <pshpack1.h>
+    struct TgaHeader {
+        char      id_length         = 0;
+        char      color_map_type    = 0;
+        char      data_type_code    = 2;    // uncompress RGB
+        short int color_map_origin  = 0;
+        short int color_map_length  = 0;
+        char      color_map_depth   = 0;
+        short int x_origin          = 0;
+        short int y_origin          = 0;
+        short     width             = 0;
+        short     height            = 0;
+        char      bits_per_pixel    = 24;   // bgr888
+        char      image_descriptor  = 0;
+    };
+#include <poppack.h>
 
+    TgaHeader header;
+    header.width  = m_width;
+    header.height = m_height;
 
-    for (uint y = 0, i = 0; y < m_height; ++y)
-    {
-        for (uint x = 0; x < m_width; ++x, ++i)
-        {
-            const Color & c = FixForPaintDotNet(m_pixels[i]);
-            const uint r = FloatToUint(c.r * 255);
-            const uint g = FloatToUint(c.g * 255);
-            const uint b = FloatToUint(c.b * 255);
-            fprintf(f, "%u %u %u ", r, g, b);
-        }
-        fprintf(f, "\n");
+    fwrite(&header, sizeof(TgaHeader), 1, f);
+
+    for (const Color & c : m_pixels) {
+        const uint r = Min(FloatToUint(c.r * 255), uint(255));
+        const uint g = Min(FloatToUint(c.g * 255), uint(255));
+        const uint b = Min(FloatToUint(c.b * 255), uint(255));
+        fputc(b, f);
+        fputc(g, f);
+        fputc(r, f);
     }
 
     fclose(f);
