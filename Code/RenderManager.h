@@ -30,8 +30,11 @@ public:
 	~RenderManager();
 
 	void Start();
+
 	bool IsDone();
 	float32 GetProgress();
+    void WaitForProgress();
+
 	void SetSamplesPerPixel(uint32 spp) { mSpp = spp; }
 
 protected:
@@ -43,9 +46,13 @@ private:
 	typedef std::vector<Renderer *> RendererList;
 	typedef std::vector<Block>    BlockList;
 
-    CriticalSection   mLockBlocks;
 	RendererList 	  mRenderers;
+
+    CriticalSection   mLockBlocks;
 	BlockList	      mBlocks;
+
+    Semaphore         mProgressSemaphore;
+
 	Scene & 		  mScene;
 	Camera & 	      mCamera;
 	CImage &          mBackbuffer;

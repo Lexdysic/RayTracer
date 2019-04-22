@@ -32,8 +32,6 @@ RenderManager::~RenderManager ()
 		renderer->Stop();
         delete renderer;
     }
-
-
 }
 
 //=============================================================================
@@ -85,6 +83,7 @@ bool RenderManager::GetBlock (Block & out)
 
     mLockBlocks.Enter();
 
+
     if (!mBlocks.empty()) {
         ret =  true;
 
@@ -93,6 +92,7 @@ bool RenderManager::GetBlock (Block & out)
     }
 
     mLockBlocks.Leave();
+    mProgressSemaphore.Post();
 
     return ret;
 }
@@ -107,6 +107,12 @@ void RenderManager::CompleteBlock ()
 float32 RenderManager::GetProgress ()
 {
 	return mCompletedBlocks / float32(mTotalBlocks);
+}
+
+//=============================================================================
+void RenderManager::WaitForProgress ()
+{
+    mProgressSemaphore.Wait();
 }
 
 }// namespace RT

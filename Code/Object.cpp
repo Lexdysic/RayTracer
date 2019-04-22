@@ -154,13 +154,12 @@ Ellipsoid::Ellipsoid(const Ellipsoid & e) :
 //=============================================================================
 bool Ellipsoid::Intersect(Result & out, const Ray3 & ray) const
 {
-	const Ray3 r(
-		mObjectToWorldI * (ray.origin - Vector3(mCenter)), 
-		mObjectToWorldI * ray.direction
-	);
+    const Point3 &  origin    = mObjectToWorldI * (ray.origin - Vector3(mCenter));
+    const Vector3 & direction = mObjectToWorldI * ray.direction;
+	const Ray3 r(origin, direction);
 	
 	IntersectInfo3 info;
-	if( ::Intersect(info, r, Sphere3::Unit) )
+	if (::Intersect(info, r, Sphere3::Unit))
 	{
 		if ( info.time > 0.0f )
 		{

@@ -78,7 +78,7 @@ Application::Application() :
 {
     //if (!TrySceneFromFile())
     {
-	    mRenderManager.SetSamplesPerPixel(1000);
+	    mRenderManager.SetSamplesPerPixel(10);
 	    SceneCreateWalls();
 	    SceneCreateSpheres();
 	    SceneCreateReddit();
@@ -122,7 +122,7 @@ void Application::Run()
 			lastProgress = currProgress;
 		}
 
-        ThreadSleep(Time::Seconds(1));
+        mRenderManager.WaitForProgress();
 	}
     
     char filename[64];
