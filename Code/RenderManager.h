@@ -50,8 +50,7 @@ private:
 
     CriticalSection   mLockBlocks;
 	BlockList	      mBlocks;
-
-    Semaphore         mProgressSemaphore;
+    Event             mProgressEvent;
 
 	Scene & 		  mScene;
 	Camera & 	      mCamera;

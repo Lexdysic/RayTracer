@@ -92,7 +92,7 @@ bool RenderManager::GetBlock (Block & out)
     }
 
     mLockBlocks.Leave();
-    mProgressSemaphore.Post();
+    mProgressEvent.Post();
 
     return ret;
 }
@@ -112,7 +112,7 @@ float32 RenderManager::GetProgress ()
 //=============================================================================
 void RenderManager::WaitForProgress ()
 {
-    mProgressSemaphore.Wait();
+    mProgressEvent.Wait();
 }
 
 }// namespace RT

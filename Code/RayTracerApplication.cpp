@@ -52,7 +52,7 @@ std::ostream & operator<< (std::ostream & out, const ToTime & t)
 	}
 	else
 	{
-		out << s << LABEL_S << " ";
+		out << s << LABEL_S;
 	}
 
 	return out;
@@ -78,7 +78,7 @@ Application::Application() :
 {
     //if (!TrySceneFromFile())
     {
-	    mRenderManager.SetSamplesPerPixel(10);
+	    mRenderManager.SetSamplesPerPixel(100);
 	    SceneCreateWalls();
 	    SceneCreateSpheres();
 	    SceneCreateReddit();
@@ -97,30 +97,23 @@ void Application::Run()
 
 	mRenderManager.Start();
 
-	float32 lastProgress = mRenderManager.GetProgress();
 	while (!mRenderManager.IsDone())
 	{
-		const float32 currProgress = mRenderManager.GetProgress();
+		const float32     currProgress = mRenderManager.GetProgress();
+		const Time::Point endTick      = Time::GetRealTime();
 
-		// Print Progress?
-		if(currProgress != lastProgress)
-		{
-			const Time::Point endTick = Time::GetRealTime();
-
-			std::cout 
-				<< std::setfill(' ')
-				<< std::fixed 
-				<< std::setprecision(2)
-				<< std::setw(6)
-				<< currProgress * 100.0f
-				<< "%  "
+		std::cout 
+            << '['
+			<< ToTime(endTick - startTick)
+            << ']'
+			<< std::setfill(' ')
+			<< std::fixed 
+			<< std::setprecision(2)
+			<< std::setw(6)
+			<< currProgress * 100.0f
+			<< "%  "
 				
-				<< "Time = " 
-				<< ToTime(endTick - startTick) 
-				<< std::endl;
-
-			lastProgress = currProgress;
-		}
+			<< std::endl;
 
         mRenderManager.WaitForProgress();
 	}
